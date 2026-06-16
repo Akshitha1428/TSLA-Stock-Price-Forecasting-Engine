@@ -2,18 +2,34 @@ import streamlit as st
 import pandas as pd
 from pathlib import Path
 
+st.set_page_config(
+page_title="Tesla Stock Analysis Dashboard",
+page_icon="📈",
+layout="wide"
+)
+
+st.title("📈 Tesla Stock Analysis Dashboard")
+
 @st.cache_data
 def load_data():
-    data_file = Path(__file__).parent / "TESLA.csv"
-    df = pd.read_csv(data_file)
-
-    df["Date"] = pd.to_datetime(df["Date"])
-    df = df.sort_values("Date")
-
-    df["Daily Return"] = df["Adj Close"].pct_change()
-    df["MA20"] = df["Adj Close"].rolling(window=20).mean()
-    df["MA50"] = df["Adj Close"].rolling(window=50).mean()
-
-    return df
+file_path = Path(**file**).parent / "TESLA.csv"
+df = pd.read_csv(file_path)
+return df
 
 df = load_data()
+
+st.subheader("Dataset Preview")
+st.dataframe(df.head())
+
+st.subheader("Column Names")
+st.write(df.columns.tolist())
+
+st.subheader("Dataset Shape")
+st.write(f"Rows: {df.shape[0]}")
+st.write(f"Columns: {df.shape[1]}")
+
+st.subheader("Statistical Summary")
+st.dataframe(df.describe())
+
+st.success("Dataset loaded successfully!")
+
