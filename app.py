@@ -21,10 +21,7 @@ st.set_page_config(
 # ============================================================
 
 @st.cache_data
-from pathlib import Path
-
-DATA_FILE = Path(__file__).parent / "TESLA.csv"
-df = pd.read_csv(DATA_FILE)
+df = pd.read_csv("TSLA.csv")
 
     # Convert Date Column
     df["Date"] = pd.to_datetime(df["Date"])
